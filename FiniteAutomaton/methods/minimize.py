@@ -2,17 +2,17 @@ from typing import List, Dict, Tuple, Set
 from copy import deepcopy
 
 from FiniteAutomaton.Edge import Edge
-from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
+from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
 
 
-def minimize(deterministic_automaton: FiniteAutomaton) -> FiniteAutomaton:
-    automaton: FiniteAutomaton = deepcopy(deterministic_automaton)
+def minimize(deterministic_automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
+    automaton: FiniteAutomatonBase = deepcopy(deterministic_automaton)
     automaton.reindex_vertices()
     automaton.add_empty_keys()
 
     mask: Dict[str, str] = {}
 
-    copy = FiniteAutomaton([], set(), [], '0')
+    copy = FiniteAutomatonBase([], set(), [], '0')
 
     for i in automaton.graph.keys():
         if i in automaton.terminals:

@@ -1,10 +1,10 @@
 from copy import deepcopy
 from typing import Set
 
-from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
+from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
 
 
-def reverse(determinate_automaton: FiniteAutomaton) -> FiniteAutomaton:
+def reverse(determinate_automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
     automaton = deepcopy(determinate_automaton)
     automaton.add_empty_keys()
     new_terminals: Set[str] = set()

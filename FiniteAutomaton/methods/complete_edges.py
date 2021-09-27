@@ -1,10 +1,10 @@
 from copy import deepcopy
 
 from FiniteAutomaton.Edge import Edge
-from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
+from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
 
 
-def complete_edges(determinate_automaton: FiniteAutomaton) -> FiniteAutomaton:
+def complete_edges(determinate_automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
     automaton = deepcopy(determinate_automaton)
     automaton.add_empty_keys()
 

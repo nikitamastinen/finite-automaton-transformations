@@ -1,11 +1,7 @@
 from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
-from FiniteAutomaton.complete_edges import complete_edges
-from FiniteAutomaton.determinate import determinate
-from FiniteAutomaton.reverse import reverse
-from FiniteAutomaton.minimize import minimize
 
 
-if __name__ == '__main__':
+def test_minimize():
     finite_automaton: FiniteAutomaton = FiniteAutomaton(
         [
             (0, 1, 'a'),
@@ -31,10 +27,19 @@ if __name__ == '__main__':
         ['a', 'b'],
         '0',
     )
-    # finite_automaton = determinate(finite_automaton)
-    # finite_automaton = complete_edges(finite_automaton)
-    # finite_automaton.print()
-    # finite_automaton = reverse(finite_automaton)
-    # finite_automaton.print()
-    finite_automaton = minimize(finite_automaton)
-    finite_automaton.print()
+    finite_automaton.convert_to_deterministic_automaton()
+    finite_automaton.remove_empty_value_edges()
+    finite_automaton.add_missing_edges()
+    finite_automaton.minimize()
+    assert {
+        'head': '0',
+        'edges': [
+            ('0', '1', 'a'),
+            ('0', '2', 'b'),
+            ('1', '0', 'b'),
+            ('1', '2', 'a'),
+            ('2', '0', 'a'),
+            ('2', '1', 'b')
+        ],
+        'terminals': ['0']
+    }

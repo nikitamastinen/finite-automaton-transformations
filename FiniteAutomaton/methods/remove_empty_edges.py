@@ -1,12 +1,12 @@
 from typing import Set
 
-from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
+from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
 from FiniteAutomaton.Edge import Edge
 
 
-def remove_empty_edges(automaton: FiniteAutomaton) -> FiniteAutomaton:
+def remove_empty_edges(automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
     used: Set = set()
-    copy = FiniteAutomaton(list(), set(), automaton.alphabet, automaton.start)
+    copy = FiniteAutomatonBase(list(), automaton.terminals, automaton.alphabet, automaton.start)
 
     def _dfs(v: str, root: str):
         used.add(v)
