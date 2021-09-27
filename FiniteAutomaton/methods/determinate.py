@@ -19,6 +19,8 @@ def determinate(automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
     copy.start = _hash_vertex([copy.start])
     queue.put([automaton.start])
     used.add(_hash_vertex([automaton.start]))
+    if automaton.start in automaton.terminals:
+        copy.terminals.add(copy.start)
 
     while not queue.empty():
         vertex: List[str] = queue.get()

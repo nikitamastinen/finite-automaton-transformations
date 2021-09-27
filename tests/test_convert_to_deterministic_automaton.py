@@ -1,7 +1,7 @@
 from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
 
 
-def test_convert_to_deterministic():
+def test_convert_to_deterministic_automaton():
     finite_automaton: FiniteAutomaton = FiniteAutomaton(
         [
             ('1', '2', 'a'),

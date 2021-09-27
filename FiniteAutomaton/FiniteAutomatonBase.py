@@ -48,9 +48,14 @@ class FiniteAutomatonBase:
                     ]
         self.graph = indexed_graph
         self.start = reindex_map[self.start]
-        self.terminals = [reindex_map[i] for i in self.terminals]
+        self.terminals = {reindex_map[i] for i in self.terminals}
 
     def add_empty_keys(self) -> None:
+        for i in self.terminals:
+            if i not in self.graph:
+                self.graph[i] = []
+        if self.start not in self.graph:
+            self.graph[self.start] = []
         old_keys: List = deepcopy([*self.graph.keys()])
         for key in old_keys:
             for e in self.graph[key]:

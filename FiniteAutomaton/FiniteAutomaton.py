@@ -2,6 +2,7 @@ from typing import Dict, Any
 
 from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
 
+from FiniteAutomaton.methods.get_regular_expression import get_regular_expression
 from FiniteAutomaton.methods.minimize import minimize
 from FiniteAutomaton.methods.remove_empty_edges import remove_empty_edges
 from FiniteAutomaton.methods.determinate import determinate
@@ -27,6 +28,9 @@ class FiniteAutomaton:
 
     def minimize(self) -> None:
         self.base = minimize(self.base)
+
+    def get_regular_expression(self) -> str:
+        return get_regular_expression(self.base)
 
     def print(self) -> None:
         self.base.print()

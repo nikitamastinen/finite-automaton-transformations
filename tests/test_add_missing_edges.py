@@ -1,7 +1,7 @@
 from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
 
 
-def test_complete_edges():
+def test_add_missing_edges():
     finite_automaton: FiniteAutomaton = FiniteAutomaton(
         [
             ('1', '2', 'a'),

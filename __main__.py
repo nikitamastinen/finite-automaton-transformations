@@ -1,52 +1,14 @@
 from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
-from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
-from FiniteAutomaton.methods.determinate import determinate
-from FiniteAutomaton.methods.minimize import minimize
-
 
 if __name__ == '__main__':
-    # finite_automaton: FiniteAutomaton = FiniteAutomaton(
-    #     [
-    #         ('1', '2', ''),
-    #         ('1', '4', 'b'),
-    #         ('2', '3', 'a'),
-    #         ('2', '5', ''),
-    #     ],
-    #     {'1', '2', '5'},
-    #     ['a', 'b'],
-    #     '1',
-    # )
-    # finite_automaton.remove_empty_value_edges()
-    # print(finite_automaton.dict())
-    finite_automaton: FiniteAutomatonBase = FiniteAutomatonBase(
-        [
-            (0, 1, 'a'),
-            (1, 2, 'a'),
-            (2, 0, 'a'),
-            (3, 4, 'a'),
-            (4, 5, 'a'),
-            (5, 3, 'a'),
-            (6, 7, 'a'),
-            (7, 8, 'a'),
-            (8, 6, 'a'),
-            (0, 3, 'b'),
-            (3, 6, 'b'),
-            (6, 0, 'b'),
-            (1, 4, 'b'),
-            (4, 7, 'b'),
-            (7, 1, 'b'),
-            (2, 5, 'b'),
-            (5, 8, 'b'),
-            (8, 2, 'b'),
-        ],
-        {'0', '4', '8'},
-        ['a', 'b'],
+    finite_automaton: FiniteAutomaton = FiniteAutomaton([
+        (0, 1, 'a'),
+        (1, 2, 'b'),
+        (2, 2, 'a'),
+        (2, 3, 'c'),
+    ],
+        {'1', '3'},
+        ['a', 'b', 'c'],
         '0',
     )
-    finite_automaton = determinate(finite_automaton)
-    # finite_automaton = complete_edges(finite_automaton)
-    # finite_automaton.print()
-    # finite_automaton = reverse(finite_automaton)
-    # finite_automaton.print()
-    # finite_automaton = minimize(finite_automaton)
-    finite_automaton.print()
+    print(finite_automaton.get_regular_expression())

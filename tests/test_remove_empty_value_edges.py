@@ -1,7 +1,7 @@
 from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
 
 
-def test_determinate():
+def test_remove_empty_value_edges():
     finite_automaton: FiniteAutomaton = FiniteAutomaton(
         [
             ('1', '2', ''),

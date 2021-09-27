@@ -15,9 +15,9 @@ def remove_empty_edges(automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
             return
 
         for e in automaton.graph[v]:
+            if e.end == v and e.value != '':
+                copy.add_edge(Edge(root, e.end, e.value))
             if e.end in used:
-                if e.end == v and e.value != '':
-                    copy.add_edge(Edge(root, e.end, e.value))
                 continue
             if e.value == '':
                 if e.end in automaton.terminals:
@@ -29,5 +29,4 @@ def remove_empty_edges(automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
     for key in automaton.graph.keys():
         used.clear()
         _dfs(key, key)
-
     return copy

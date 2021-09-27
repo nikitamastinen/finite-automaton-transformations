@@ -2,8 +2,7 @@ from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
 
 
 def test_minimize():
-    finite_automaton: FiniteAutomaton = FiniteAutomaton(
-        [
+    finite_automaton: FiniteAutomaton = FiniteAutomaton([
             (0, 1, 'a'),
             (1, 2, 'a'),
             (2, 0, 'a'),
