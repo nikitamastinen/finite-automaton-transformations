@@ -1,7 +1,7 @@
 from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
 
 
-def test_minimize():
+def test_minimize1():
     finite_automaton: FiniteAutomaton = FiniteAutomaton([
             (0, 1, 'a'),
             (1, 2, 'a'),
@@ -41,4 +41,32 @@ def test_minimize():
             ('2', '1', 'b')
         ],
         'terminals': ['0']
+    }
+
+
+def test_minimize2():
+    finite_automaton: FiniteAutomaton = FiniteAutomaton(
+        [
+            ('1', '1', ''),
+        ],
+        {'1'},
+        ['a', 'b'],
+        '1',
+    )
+    finite_automaton.remove_empty_value_edges()
+    finite_automaton.convert_to_deterministic_automaton()
+    # finite_automaton.print()
+    finite_automaton.add_missing_edges()
+    finite_automaton.minimize()
+
+    finite_automaton.print()
+    assert finite_automaton.dict() == {
+        'head': '0',
+        'edges': [
+            ('0', '1', 'a'),
+            ('0', '1', 'b'),
+            ('1', '1', 'a'),
+            ('1', '1', 'b'),
+        ],
+        'terminals': ['0'],
     }

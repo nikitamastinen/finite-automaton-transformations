@@ -3,6 +3,7 @@ from copy import deepcopy
 
 from FiniteAutomaton.Edge import Edge
 from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
+from FiniteAutomaton.methods.complete_edges import complete_edges
 
 
 def minimize(deterministic_automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
@@ -22,6 +23,7 @@ def minimize(deterministic_automaton: FiniteAutomatonBase) -> FiniteAutomatonBas
     while True:
         next_state: Dict[str, List[List[str]]] = {}
         for v in automaton.graph.keys():
+            next_state[v] = [[mask[v]]]
             for e in automaton.graph[v]:
                 if v in next_state.keys():
                     next_state[v].append([e.value, mask[e.end]])
@@ -49,10 +51,11 @@ def minimize(deterministic_automaton: FiniteAutomatonBase) -> FiniteAutomatonBas
                 for i in next_state[key]:
                     if key in automaton.terminals:
                         copy.terminals.add(mask[key])
-                    edge_tuple = (mask[key], i[1], i[0])
-                    if edge_tuple not in used:
-                        used.add(edge_tuple)
-                        copy.add_edge(Edge(mask[key], i[1], i[0]))
+                    if len(i) >= 2:
+                        edge_tuple = (mask[key], i[1], i[0])
+                        if edge_tuple not in used:
+                            used.add(edge_tuple)
+                            copy.add_edge(Edge(mask[key], i[1], i[0]))
             break
 
         mask = {}

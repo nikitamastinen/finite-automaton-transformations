@@ -1,7 +1,7 @@
 from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
 
 
-def test_remove_empty_value_edges():
+def test_remove_empty_value_edges1():
     finite_automaton: FiniteAutomaton = FiniteAutomaton(
         [
             ('1', '2', ''),
@@ -14,7 +14,7 @@ def test_remove_empty_value_edges():
         '1',
     )
     finite_automaton.remove_empty_value_edges()
-    finite_automaton.print()
+
     assert finite_automaton.dict() == {
         'head': '1',
         'edges': [
@@ -23,4 +23,22 @@ def test_remove_empty_value_edges():
             ('2', '3', 'a')
         ],
         'terminals': ['1', '2', '5']
+    }
+
+
+def test_remove_empty_value_edges2():
+    finite_automaton: FiniteAutomaton = FiniteAutomaton(
+        [
+            ('1', '1', ''),
+        ],
+        {'1'},
+        ['a', 'b'],
+        '1',
+    )
+    finite_automaton.remove_empty_value_edges()
+    finite_automaton.print()
+    assert finite_automaton.dict() == {
+        'head': '1',
+        'edges': [],
+        'terminals': ['1'],
     }

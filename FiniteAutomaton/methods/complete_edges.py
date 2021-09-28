@@ -16,10 +16,12 @@ def complete_edges(determinate_automaton: FiniteAutomatonBase) -> FiniteAutomato
     old_keys = deepcopy([*automaton.graph.keys()])
     for key in old_keys:
         for w in automaton.alphabet:
+            automaton.add_edge(Edge('end', 'end', w))
             is_value_founded: bool = False
             for edge in automaton.graph[key]:
                 if edge.value == w:
                     is_value_founded = True
+                    break
             if not is_value_founded:
                 automaton.add_edge(Edge(key, last_name, w))
     automaton.reindex_vertices()
