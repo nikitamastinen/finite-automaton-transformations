@@ -2,17 +2,18 @@ from typing import List, Dict, Tuple, Set
 from copy import deepcopy
 
 from FiniteAutomaton.Edge import Edge
-from FiniteAutomaton.FiniteAutomaton import FiniteAutomaton
+from FiniteAutomaton.FiniteAutomatonBase import FiniteAutomatonBase
+from FiniteAutomaton.methods.complete_edges import complete_edges
 
 
-def minimize(deterministic_automaton: FiniteAutomaton) -> FiniteAutomaton:
-    automaton: FiniteAutomaton = deepcopy(deterministic_automaton)
+def minimize(deterministic_automaton: FiniteAutomatonBase) -> FiniteAutomatonBase:
+    automaton: FiniteAutomatonBase = deepcopy(deterministic_automaton)
     automaton.reindex_vertices()
     automaton.add_empty_keys()
 
     mask: Dict[str, str] = {}
 
-    copy = FiniteAutomaton([], set(), [], '0')
+    copy = FiniteAutomatonBase([], set(), [], '0')
 
     for i in automaton.graph.keys():
         if i in automaton.terminals:
@@ -22,6 +23,7 @@ def minimize(deterministic_automaton: FiniteAutomaton) -> FiniteAutomaton:
     while True:
         next_state: Dict[str, List[List[str]]] = {}
         for v in automaton.graph.keys():
+            next_state[v] = [[mask[v]]]
             for e in automaton.graph[v]:
                 if v in next_state.keys():
                     next_state[v].append([e.value, mask[e.end]])
@@ -49,10 +51,11 @@ def minimize(deterministic_automaton: FiniteAutomaton) -> FiniteAutomaton:
                 for i in next_state[key]:
                     if key in automaton.terminals:
                         copy.terminals.add(mask[key])
-                    edge_tuple = (mask[key], i[1], i[0])
-                    if edge_tuple not in used:
-                        used.add(edge_tuple)
-                        copy.add_edge(Edge(mask[key], i[1], i[0]))
+                    if len(i) >= 2:
+                        edge_tuple = (mask[key], i[1], i[0])
+                        if edge_tuple not in used:
+                            used.add(edge_tuple)
+                            copy.add_edge(Edge(mask[key], i[1], i[0]))
             break
 
         mask = {}
