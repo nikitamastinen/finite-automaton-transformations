@@ -13,7 +13,3 @@ venv:
 test:
 	$(VENV)/bin/pytest -v  tests
 
-.PHONY: run
-run:
-	$(VENV)/bin/python __main__.py
-
